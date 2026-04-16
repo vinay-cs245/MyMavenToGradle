@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:3.8.1'
+}
+
+// THIS is the correct way in apply-plugin style
+mainClassName = 'com.example.App'
