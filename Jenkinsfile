@@ -1,21 +1,29 @@
 pipeline {
     agent any
 
-    tools {
-        gradle 'Gradle'
-    }
-
     stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/vinay-cs245/MyMavenToGradle'
+            }
+        }
+
+        stage('Permission Fix') {
+            steps {
+                sh 'chmod +x gradlew'
+            }
+        }
 
         stage('Build') {
             steps {
-                sh 'gradle clean build'
+                sh './gradlew clean build'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'gradle test'
+                sh './gradlew test'
             }
         }
 
@@ -28,10 +36,10 @@ pipeline {
 
     post {
         success {
-            echo 'Build successful!'
+            echo 'Build SUCCESS'
         }
         failure {
-            echo 'Build failed!'
+            echo 'Build FAILED'
         }
     }
 }
